@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { Button } from '@/components/ui/button'
 import logo from '../../assets/images/logo.png'
 function Header() {
   return (
@@ -12,7 +13,8 @@ function Header() {
             <span className="text-lg font-medium hover:text-green-600 transition">How It Works</span>
           </div>
           <div className='flex items-center'>
-            <span className='text-lg font-medium'>Sign In</span>
+            <Button className='text-lg text-green-700 bg-white-900 font-medium hover:bg-green-50 px-5 hover:rounded-sm cursor-pointer'>
+            <a href="/login">Login In</a></Button>
           </div>
         </nav>
 

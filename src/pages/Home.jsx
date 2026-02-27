@@ -29,7 +29,7 @@ function Home() {
                 size="lg"
                 className="bg-green-600 hover:bg-green-700"
               >
-                <a href="/dashboard">
+                <a href="/signup">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -95,7 +95,7 @@ function Home() {
         <section id="how-it-works" className="py-20">
           <div className="container mx-auto px-4 md:px-6 text-center">
             <Badge variant="outline" className="bg-green-100 text-lg px-10 text-green-700">
-              How It Works
+              How It Works
             </Badge>
             <h2 className="gradient-title mt-2 text-3xl md:text-4xl">
               Splitting expenses has never been easier
@@ -164,7 +164,7 @@ function Home() {
               stress‑free.
             </p>
             <Button asChild size="lg" className="bg-green-800 hover:opacity-90">
-              <a href="/dashboard">
+              <a href="/signup">
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>

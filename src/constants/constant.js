@@ -1,4 +1,4 @@
-import { Bell, CreditCard, PieChart, Receipt, Users } from "lucide-react";
+import { Bell, CreditCard, PieChart, Receipt, Users, ClockCheck } from "lucide-react";
 
 export const FEATURES = [
     {
@@ -43,9 +43,9 @@ export const FEATURES = [
     },
     {
         title: "Real‑time Updates",
-        Icon: Receipt,
-        bg: "bg-teal-100",
-        color: "text-teal-600",
+        Icon: ClockCheck ,
+        bg: "bg-orange-100",
+        color: "text-orange-600",
         description:
             "See new expenses and repayments the moment your friends add them.",
     }
