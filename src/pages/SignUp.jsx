@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { EyeIcon, EyeOffIcon, Loader, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -173,6 +173,7 @@ export default function SignUp() {
                     <Button className="text-base w-full h-12 bg-green-600 hover:bg-green-700 text-white flex items-center justify-center gap-2" onClick={submitHandler}>
                         Sign Up
                     </Button>
+                    <p className="text-center">Already have an account <Link to="/login" className="text-green-700 underline underline-offset-3">Login</Link></p>
                 </CardContent>
             </Card>
             <ToastContainer />

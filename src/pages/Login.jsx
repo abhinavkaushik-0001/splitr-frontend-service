@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import * as z from "zod";
 import axios from "axios";
+import { Link, useLocation } from "react-router";
 import { ToastContainer, toast } from 'react-toastify';
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const loginSchema = z.object({
@@ -65,9 +66,7 @@ function Login() {
                     <CardTitle className="text-2xl font-bold tracking-tight">
                         Log In
                     </CardTitle>
-                    {/*<CardDescription className="text-gray-500">
-                        Welcome! Please fill in the details to get started.
-                    </CardDescription>*/}
+
                 </CardHeader>
                 <CardContent className="space-y-6 px-10 pb-12">
                     <div className="space-y-4">
@@ -94,6 +93,7 @@ function Login() {
                     <Button className="text-base w-full h-12 bg-green-600 hover:bg-green-700 text-white flex items-center justify-center gap-2" onClick={handleSubmit}>
                         Log In
                     </Button>
+                    <p className="text-center">Don't have an account <Link to="/signup" className="text-green-700 underline underline-offset-3">Create account</Link></p>
                 </CardContent>
             </Card>
             <ToastContainer />
