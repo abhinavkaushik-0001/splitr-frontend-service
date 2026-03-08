@@ -1,184 +1,101 @@
-import React from 'react'
-import Header from '@/component/Header/Header'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button';
+import { Plus, Users, User } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowRight } from 'lucide-react'
-import hero from '@/assets/images/hero.png'
-import { STEPS, TESTIMONIALS, FEATURES } from '@/constants/constant'
+import { GroupModel } from '@/component/GroupModel/GroupModel';
 function Home() {
-  return (
-    <>
-      <Header />
-      <div className='flex flex-col pt-16'>
-        <section className="mt-20 pb-12 space-y-10 md:space-y-15 px-5">
-          <div className="container mx-auto px-4 md:px-6 text-center space-y-6">
-            <Badge variant="outline" className="bg-green-100 text-lg px-10 text-green-700"> Split Expenses. Simplify Life.</Badge>
-            <h1 className="gradient-title mx-auto max-w-6xl text-4xl font-bold md:text-8xl">
-              The smartest way to split expenses with friends
-            </h1>
+    const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+    let data,isLoading=false;
 
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/8">
-              Track shared expenses, split bills effortlessly, and settle up
-              quickly. Never worry about who owes who again.
-            </p>
-            <div className="flex flex-col items-center gap-4 sm:flex-row justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-green-600 hover:bg-green-700"
-              >
-                <a href="/signup">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-green-600 text-green-600 hover:bg-green-50"
-              >
-                <a href="#how-it-works">See How It Works</a>
-              </Button>
+    //const { data, isLoading } = useConvexQuery(api.contacts.getAllContacts);
+
+    // Check for the createGroup parameter when the component mounts
+    // useEffect(() => {
+    //     const createGroupParam = searchParams.get("createGroup");
+
+    //     if (createGroupParam === "true") {
+    //         // Open the modal
+    //         setIsCreateGroupModalOpen(true);
+
+    //         // Remove the parameter from the URL
+    //         const url = new URL(window.location.href);
+    //         url.searchParams.delete("createGroup");
+
+    //         // Replace the current URL without the parameter
+    //         router.replace(url.pathname + url.search);
+    //     }
+    // }, [searchParams, router]);
+
+    if (isLoading) {
+        return (
+            <div className="container mx-auto py-12">
+                <BarLoader width={"100%"} color="#36d7b7" />
             </div>
-          </div>
+        );
+    }
 
-          <div className="container mx-auto max-w-5xl overflow-hidden rounded-xl shadow-xl">
-            <div className="gradient p-1 aspect-[16/9]">
-              <img
-                src={hero}
-                width={1280}
-                height={720}
-                alt="Banner"
-                className="rounded-lg mx-auto"
-                priority
-              />
+    const { users, groups } = data || { users: [], groups: [] };
+
+    return (
+        <div className="container mx-auto py-6">
+            <div className="mx-1 flex flex-col flex-row items-center gap-4 justify-between mb-6">
+                <h1 className="text-5xl gradient-title">Groups</h1>
+                <Button className="text-md bg-green-600 hover:bg-green-700"  onClick={() => setIsCreateGroupModalOpen(true)}>                    
+                    Create Group
+                    <Plus className="mr-1 h-4 w-4" />
+                </Button>
             </div>
-          </div>
-        </section>
 
-        {/* ───── Features ───── */}
-        <section id="features" className="bg-gray-50 py-20">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <Badge variant="outline" className="bg-green-100 text-lg px-10 text-green-700">
-              Features
-            </Badge>
-            <h2 className="gradient-title mt-2 text-3xl md:text-4xl">
-              Everything you need to split expenses
-            </h2>
-            <p className="mx-auto mt-3 max-w-[700px] text-gray-500 md:text-xl/relaxed">
-              Our platform provides all the tools you need to handle shared
-              expenses with ease.
-            </p>
-
-            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {FEATURES.map(({ title, Icon, bg, color, description }) => (
-                <Card
-                  key={title}
-                  className="flex flex-col items-center space-y-4 p-6 text-center"
-                >
-                  <div className={`rounded-full p-3 ${bg}`}>
-                    <Icon className={`h-6 w-6 ${color}`} />
-                  </div>
-
-                  <h3 className="text-xl font-bold">{title}</h3>
-                  <p className="text-gray-500">{description}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ───── How it works ───── */}
-        <section id="how-it-works" className="py-20">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <Badge variant="outline" className="bg-green-100 text-lg px-10 text-green-700">
-              How It Works
-            </Badge>
-            <h2 className="gradient-title mt-2 text-3xl md:text-4xl">
-              Splitting expenses has never been easier
-            </h2>
-            <p className="mx-auto mt-3 max-w-[700px] text-gray-500 md:text-xl/relaxed">
-              Follow these simple steps to start tracking and splitting expenses
-              with friends.
-            </p>
-
-            <div className="mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-3">
-              {STEPS.map(({ label, title, description }) => (
-                <div key={label} className="flex flex-col items-center space-y-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-xl font-bold text-green-600">
-                    {label}
-                  </div>
-                  <h3 className="text-xl font-bold">{title}</h3>
-                  <p className="text-gray-500 text-center">{description}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h2 className="text-xl font-bold mb-4 flex items-center">
+                        <Users className="mr-2 h-5 w-5" />
+                        Groups
+                    </h2>
+                    {groups.length === 0 ? (
+                        <Card>
+                            <CardContent className="py-6 text-center text-muted-foreground">
+                                No groups yet. Create a group to start tracking shared expenses.
+                            </CardContent>
+                        </Card>
+                    ) : (
+                        <div className="flex flex-col gap-4">
+                            {groups.map((group) => (
+                                <Link key={group.id} href={`/groups/${group.id}`}>
+                                    <Card className="hover:bg-muted/30 transition-colors cursor-pointer">
+                                        <CardContent className="py-4">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-primary/10 p-2 rounded-md">
+                                                        <Users className="h-6 w-6 text-primary" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="font-medium">{group.name}</p>
+                                                        <p className="text-sm text-muted-foreground">
+                                                            {group.memberCount} members
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
-              ))}
             </div>
-          </div>
-        </section>
 
-        {/* ───── Testimonials ───── */}
-        <section className="bg-gray-50 py-20">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <Badge variant="outline" className="bg-green-100 text-lg px-10 text-green-700">
-              Testimonials
-            </Badge>
-            <h2 className="gradient-title mt-2 text-3xl md:text-4xl">
-              What our users are saying
-            </h2>
-
-            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {TESTIMONIALS.map(({ quote, name, role, image }) => (
-                <Card key={name} className="flex flex-col justify-between">
-                  <CardContent className="space-y-4 p-6">
-                    <p className="text-gray-500">{quote}</p>
-                    <div className="flex items-center space-x-3">
-                      <Avatar>
-                        <AvatarImage src={image} alt={name} />
-                        <AvatarFallback className="uppercase">
-                          {name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="text-left">
-                        <p className="text-sm font-medium">{name}</p>
-                        <p className="text-sm text-muted-foreground">{role}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ───── Call‑to‑Action ───── */}
-        <section className="py-20 gradient">
-          <div className="container mx-auto px-4 md:px-6 text-center space-y-6">
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl text-white">
-              Ready to simplify expense sharing?
-            </h2>
-            <p className="mx-auto max-w-[600px] text-green-100 md:text-xl/relaxed">
-              Join thousands of users who have made splitting expenses
-              stress‑free.
-            </p>
-            <Button asChild size="lg" className="bg-green-800 hover:opacity-90">
-              <a href="/signup">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </section>
-
-        {/* ───── Footer ───── */}
-        <footer className="border-t bg-gray-50 py-12 text-center text-sm text-muted-foreground">
-           Copyright © {new Date().getFullYear()} Splitr Labs Inc.
-        </footer>
-      </div>
-    </>
-  )
+            <GroupModel
+                isOpen={isCreateGroupModalOpen}
+                onClose={() => setIsCreateGroupModalOpen(false)}
+                onSuccess={(groupId) => {
+                    //router.push(`/groups/${groupId}`);
+                }}
+            />
+        </div>
+    );
 }
 
 export default Home
